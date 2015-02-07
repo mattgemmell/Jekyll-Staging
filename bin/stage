@@ -32,15 +32,36 @@
 # Configuration
 # ========================================
 
+# Load in configuration file, or ask and populate.
+def read_or_ask_for_configuration
+  require 'yaml'
+  conf_file = File.join(ENV['HOME'], '.jekyll-stagingrc')
+  if File.exist?(conf_file)
+    YAML.load_file(conf_file)
+  else
+    conf = {}
+    print "Where is your Jekyll site located? (full path, '~' is ok) "
+    conf['jekyll_root'] = STDIN.gets
+    print "Where are your drafts located? (full path, '~' is ok) "
+    conf['drafts_dir'] = STDIN.gets
+    print "What file extension do you use for your drafts and posts? (no period) "
+    conf['file_extension'] = STDIN.gets
+    File.open(conf_file, 'wb') { |f| f.write(YAML.dump(conf)) }
+    conf
+  end
+end
+
+
+configuration = read_or_ask_for_configuration
 
 # Your Jekyll site's local root directory (it has the "_config.yml" file in it).
-$jekyll_root = "~/Dropbox/blog/mattgemmell.com" # full path ("~" is OK too)
+$jekyll_root  = configuration['jekyll_root']
 
 # Wherever you keep your local in-progress drafts, outside of your Jekyll site.
-$drafts_dir = "~/Dropbox/writing/blog" # full path ("~" is OK too)
+$drafts_dir = configuration['drafts_dir']
 
 # File-extension for your drafts and post files.
-$file_extension = "markdown" # without period (use "*" for all)
+$file_extension = configuration['file_extension']
 
 # Note: It's assumed that your drafts' filenames DON'T have date-prefixes.
 
