@@ -5,12 +5,12 @@ by [Matt Gemmell](http://mattgemmell.com/)
 
 ## What is it?
 
-It's a Ruby script that stages and unstages draft posts for Jekyll's internal server.
+It's a Ruby gem that stages and unstages draft posts for Jekyll's internal server.
 
 
 ## What are its requirements?
 
-Just Ruby itself.
+All you need is Ruby. Grab it by running `gem install jekyll-staging` in your terminal.
 
 
 ## What does it do?
@@ -40,21 +40,21 @@ Then, run the script without any arguments to see usage instructions.
 
 Basically:
 
-- **`./stage.rb FILENAME_GLOB`** stages the first matching draft.
-- **`./stage.rb -u`** unstages the first staged post.
-- **`./stage.rb -u FILENAME_GLOB`** unstages the first matching staged post.
+- **`stage FILENAME_GLOB`** stages the first matching draft.
+- **`stage -u`** unstages the first staged post.
+- **`stage -u FILENAME_GLOB`** unstages the first matching staged post.
 
 You don't need to specify full paths, because it'll be looking in your drafts folder anyway. Feel free to use partial filenames, and shell glob patterns. If there's more than one match, it'll use the first one, and it'll output the full list of matches as well as the filename it chose.
 
 Let's say you had a draft whose filename was `got-a-new-iphone.markdown`. A typical workflow would be:
 
-1. **`./stage.rb iphone`** (stage the draft for Jekyll)
+1. **`stage iphone`** (stage the draft for Jekyll)
 
 2. **`jekyll serve`** (start the built-in web server, changing to your Jekyll directory first)
 
 3. Edit your post as you see fit, and view it in your browser. When you're done, kill Jekyll's web server.
 
-4. **`./stage.rb -u`** (unstage the draft, putting it back in your drafts folder)
+4. **`stage -u`** (unstage the draft, putting it back in your drafts folder)
 
 You can then decide whether to publish the post, and build and deploy your site as usual.
 
