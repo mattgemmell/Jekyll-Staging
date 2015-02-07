@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# Staging/unstaging script for Jekyll blog posts.
+# Staging/unstaging gem for Jekyll blog posts.
 #
 # by Matt Gemmell
 #
@@ -8,7 +8,7 @@
 # Twitter: http://twitter.com/mattgemmell
 
 
-# This script moves a specified draft post into Jekyll's folder structure,
+# This gem moves a specified draft post into Jekyll's folder structure,
 # and temporarily stashes all other posts so the site will build quickly.
 #
 # This is for people who keep their drafts outside of Jekyll's folder structure.
@@ -21,7 +21,9 @@
 # Requirements: just Ruby itself.
 
 
-# Usage: Run the script with no arguments to see usage instructions.
+# Usage: Run the stage command with no arguments to see usage instructions.
+# Note: Run the command from your Jekyll site's root directory.
+# You'll be asked three configuration questions (for each site) on the first run.
 
 
 # License: CC Attribution-ShareAlike
@@ -35,7 +37,16 @@
 # Load in configuration file, or ask and populate.
 def read_or_ask_for_configuration
   require 'yaml'
-  conf_file = File.join(ENV['HOME'], '.jekyll-stagingrc')
+  
+  # Check we're in a Jekyll root directory.
+  jekyll_conf_file = File.join(Dir.pwd, '_config.yml')
+  if !File.exist?(jekyll_conf_file)
+    puts "Please run the stage command from your Jekyll site's root directory."
+    exit
+  end
+  
+  # Look for config file in the current working directory.
+  conf_file = File.join(Dir.pwd, '.jekyll-stagingrc')
   if File.exist?(conf_file)
     YAML.load_file(conf_file)
   else
@@ -239,7 +250,7 @@ end
 
 
 # Handle input
-$unstage_flag = "-u" # flag passed to the script to request unstaging
+$unstage_flag = "-u" # flag passed to the command to request unstaging
 filename_glob = nil
 unstage = false
 

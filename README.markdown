@@ -15,7 +15,7 @@ All you need is Ruby. Grab it by running `gem install jekyll-staging` in your te
 
 ## What does it do?
 
-This script is for people who:
+This gem is for people who:
 
 1. Use [Jekyll](http://jekyllrb.com) to build their static sites.
 
@@ -23,7 +23,7 @@ This script is for people who:
 
 3. Like to work on posts using Jekyll's built-in web server.
 
-If you have a lot of posts, Jekyll's rebuild process can take a while, so it can be handy to temporarily move all of your existing posts aside while you work on a draft. That's what this script does.
+If you have a lot of posts, Jekyll's rebuild process can take a while, so it can be handy to temporarily move all of your existing posts aside while you work on a draft. That's what this gem does.
 
 It lets you specify a given draft post, and it'll move it into Jekyll's folder structure (appropriately prefixing its filename with today's date). Then, it moves all other posts aside temporarily. That way, Jekyll's build and regeneration process will be super-fast while you're working on the draft.
 
@@ -34,9 +34,9 @@ Note: It's assumed that your drafts' filenames _don't_ already have date-prefixe
 
 ## How do I use it?
 
-First, specify the two appropriate paths in the script's Configuration block, and check that the post file-extension ("markdown" by default) matches your posts and drafts.
+Run the gem without any arguments to see usage instructions. Be sure to run the gem from your Jekyll site's root directory.
 
-Then, run the script without any arguments to see usage instructions.
+On the first run (per site), you'll be asked three configuration questions. The appropriate options will be stored in a `.jekyll-stagingrc` file in your site's root.
 
 Basically:
 
