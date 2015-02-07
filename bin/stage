@@ -66,13 +66,13 @@ end
 configuration = read_or_ask_for_configuration
 
 # Your Jekyll site's local root directory (it has the "_config.yml" file in it).
-$jekyll_root  = configuration['jekyll_root']
+$jekyll_root  = configuration['jekyll_root'].strip
 
 # Wherever you keep your local in-progress drafts, outside of your Jekyll site.
-$drafts_dir = configuration['drafts_dir']
+$drafts_dir = configuration['drafts_dir'].strip
 
 # File-extension for your drafts and post files.
-$file_extension = configuration['file_extension']
+$file_extension = configuration['file_extension'].strip
 
 # Note: It's assumed that your drafts' filenames DON'T have date-prefixes.
 
