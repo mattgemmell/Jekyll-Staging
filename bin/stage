@@ -239,10 +239,27 @@ def unstage_file(the_filename_glob)
 end
 
 
+def staging_in_progress()
+	# Try to determine if file(s) are already staged.
+	
+	in_progress = false
+	if directory_exists($stash_dir)
+		Dir.chdir($stash_dir)
+		matches = Dir.glob("*.#{$file_extension}")
+		if matches.count > 0
+			# Posts are in the stash directory. We're probably staging.
+			in_progress = true
+		end
+	end
+	
+	return in_progress
+end
+
+
 def show_help()
-	puts "`#{$0} FILENAME_GLOB` stages the first matching draft."
-	puts "`#{$0} #{$unstage_flag}` unstages the first staged post."
-	puts "`#{$0} #{$unstage_flag} FILENAME_GLOB` unstages the first matching staged post."
+	puts "`stage FILENAME_GLOB` stages the first matching draft."
+	puts "`stage #{$unstage_flag}` unstages the first staged post."
+	puts "`stage #{$unstage_flag} FILENAME_GLOB` unstages the first matching staged post."
 end
 
 
@@ -307,6 +324,19 @@ if directory_exists($stash_dir) == false
 		exit
 	else
 		puts "Created stash directory: #{$stash_dir}"
+	end
+end
+
+# Check whether we should proceed.
+if !unstage and staging_in_progress()
+	puts "It looks like files are already staged. You should unstage them first (stage #{$unstage_flag})."
+	puts "Do you want to proceed anyway? (y/n) [n]"
+	proceed = STDIN.gets.strip.downcase.slice(0,1)
+	if !proceed or proceed != "y"
+		puts "Aborting."
+		exit
+	else
+		puts "Proceeding anyway."
 	end
 end
 
