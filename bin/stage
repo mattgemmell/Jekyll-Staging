@@ -29,6 +29,7 @@
 # License: CC Attribution-ShareAlike
 # http://creativecommons.org/licenses/by-sa/4.0/
 
+require 'fileutils'
 
 # ========================================
 # Configuration
@@ -158,12 +159,12 @@ def isolate(the_filename_glob)
   # Moves all files from posts to stash, except those matching the glob.
 
   # Move all files from posts into stash.
-  cmd = "mv #{$posts_dir}/*.#{$file_extension} #{$stash_dir}/"
-  result = `#{cmd}`
+  files = Dir.glob(File.join($posts_dir, "*.#{$file_extension}"))
+  result = FileUtils.move(files, $stash_dir)
 
   # Move the matching files back into posts.
-  cmd = "mv #{$stash_dir}/*#{the_filename_glob}* #{$posts_dir}/"
-  result = `#{cmd}`
+  files = Dir.glob(File.join($stash_dir, "*#{the_filename_glob}*"))
+  result = FileUtils.move(files, $posts_dir)
 end
 
 
@@ -171,8 +172,8 @@ def integrate()
   # Moves all files from stash back into posts.
 
   # Move all files from stash into posts.
-  cmd = "mv #{$stash_dir}/*.#{$file_extension} #{$posts_dir}/"
-  result = `#{cmd}`
+  files = Dir.glob(File.join($stash_dir, "*.#{$file_extension}"))
+  result = FileUtils.move(files, $posts_dir)
 end
 
 
@@ -195,8 +196,7 @@ def stage_file(the_filename_glob)
   prefix = today.strftime($file_date_prefix_format)
   new_filename = "#{prefix}#{filename}"
 
-  cmd = "mv #{$drafts_dir}/#{filename} #{$posts_dir}/#{new_filename}"
-  result = `#{cmd}`
+  result = FileUtils.move(File.join($drafts_dir, filename), File.join($posts_dir, new_filename))
 
   # Isolate the staged file in posts, moving all other posts to stash.
   isolate(new_filename)
@@ -229,8 +229,7 @@ def unstage_file(the_filename_glob)
   # Move file to drafts directory, removing date from its filename.
   new_filename = filename.sub($file_date_prefix_regexp, "")
 
-  cmd = "mv #{$posts_dir}/#{filename} #{$drafts_dir}/#{new_filename}"
-  result = `#{cmd}`
+  result = FileUtils.move(File.join($posts_dir, filename), File.join($drafts_dir, new_filename))
 
   # Move all stashed files back into posts.
   integrate()
