@@ -46,11 +46,11 @@ Basically:
 
 You don't need to specify full paths, because it'll be looking in your drafts folder anyway. Feel free to use partial filenames, and shell glob patterns. If there's more than one match, it'll use the first one, and it'll output the full list of matches as well as the filename it chose.
 
-Let's say you had a draft whose filename was `got-a-new-iphone.markdown`. A typical workflow would be:
+Let's say you had a draft whose filename was `my-new-iphone.markdown`. A typical workflow would be as follows. It assumes you're already in your Jekyll site's root directory.
 
 1. **`stage iphone`** (stage the draft for Jekyll)
 
-2. **`jekyll serve`** (start the built-in web server, changing to your Jekyll directory first)
+2. **`jekyll serve`** (start the built-in web server)
 
 3. Edit your post as you see fit, and view it in your browser. When you're done, kill Jekyll's web server.
 
@@ -61,7 +61,7 @@ You can then decide whether to publish the post, and build and deploy your site 
 
 ## Where does it temporarily put my other posts?
 
-In a directory called "`_stash`", in your Jekyll site's local root directory. The directory will be created if necessary. You can set a configuration option to make it use a different directory, if you want.
+In a directory called "`_stash`", in your Jekyll site's local root directory. The directory will be created if necessary.
 
 
 ## Should I run it on my server?
