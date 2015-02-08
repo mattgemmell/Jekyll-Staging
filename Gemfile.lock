@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jekyll-staging (1.0.2)
+    jekyll-staging (1.0.3)
 
 GEM
   remote: https://rubygems.org/

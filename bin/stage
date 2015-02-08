@@ -36,37 +36,37 @@
 
 # Load in configuration file, or ask and populate.
 def read_or_ask_for_configuration
-  require 'yaml'
-  
-  # Check we're in a Jekyll root directory.
-  jekyll_conf_file = File.join(Dir.pwd, '_config.yml')
-  if !File.exist?(jekyll_conf_file)
-    puts "Please run the stage command from your Jekyll site's root directory."
-    exit
-  end
-  
-  # Look for config file in the current working directory.
-  conf_file = File.join(Dir.pwd, '.jekyll-stagingrc')
-  if File.exist?(conf_file)
-    YAML.load_file(conf_file)
-  else
-    conf = {}
-    print "Where is your Jekyll site located? (full path, '~' is ok) "
-    conf['jekyll_root'] = STDIN.gets
-    print "Where are your drafts located? (full path, '~' is ok) "
-    conf['drafts_dir'] = STDIN.gets
-    print "What file extension do you use for your drafts and posts? (no period) "
-    conf['file_extension'] = STDIN.gets
-    File.open(conf_file, 'wb') { |f| f.write(YAML.dump(conf)) }
-    conf
-  end
+	require 'yaml'
+	
+	# Check we're in a Jekyll root directory.
+	jekyll_conf_file = File.join(Dir.pwd, '_config.yml')
+	if !File.exist?(jekyll_conf_file)
+		puts "Please run the stage command from your Jekyll site's root directory."
+		exit
+	end
+
+	# Look for config file in the current working directory.
+	conf_file = File.join(Dir.pwd, '.jekyll-stagingrc')
+	if File.exist?(conf_file)
+		YAML.load_file(conf_file)
+	else
+		conf = {}
+		print "Where is your Jekyll site located? (full path, '~' is ok) "
+		conf['jekyll_root'] = STDIN.gets.strip
+		print "Where are your drafts located? (full path, '~' is ok) "
+		conf['drafts_dir'] = STDIN.gets.strip
+		print "What file extension do you use for your drafts and posts? (no period) "
+		conf['file_extension'] = STDIN.gets.strip
+		File.open(conf_file, 'wb') { |f| f.write(YAML.dump(conf)) }
+		conf
+	end
 end
 
 
 configuration = read_or_ask_for_configuration
 
 # Your Jekyll site's local root directory (it has the "_config.yml" file in it).
-$jekyll_root  = configuration['jekyll_root'].strip
+$jekyll_root = configuration['jekyll_root'].strip
 
 # Wherever you keep your local in-progress drafts, outside of your Jekyll site.
 $drafts_dir = configuration['drafts_dir'].strip
