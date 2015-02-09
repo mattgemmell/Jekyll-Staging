@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "jekyll-staging"
-  spec.version       = "1.0.5"
+  spec.version       = "1.0.6"
   spec.authors       = ["Matt Gemmell"]
   spec.email         = ["matt@mattgemmell.com"]
   spec.summary       = %q{Stage and unstage draft posts in Jekyll.}
