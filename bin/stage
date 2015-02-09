@@ -182,7 +182,7 @@ end
 def stage_file(the_filename_glob)
 	# Stages the given file.
 
-	puts "Staging \"#{the_filename_glob}\"…"
+	puts "Staging \"#{the_filename_glob}\"..."
 
 	# Grab specified file (glob) from drafts folder.
 	full_glob = "*#{the_filename_glob}*.#{$file_extension}"
@@ -211,9 +211,9 @@ def unstage_file(the_filename_glob)
 	# Unstages the given file, or the first staged file if none is specified.
 
 	if (the_filename_glob)
-		puts "Unstaging \"#{the_filename_glob}\"…"
+		puts "Unstaging \"#{the_filename_glob}\"..."
 	else
-		puts "Unstaging first staged file…"
+		puts "Unstaging first staged file..."
 	end
 
 	# Grab specified file (glob) from posts folder.
