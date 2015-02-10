@@ -99,7 +99,7 @@ Please [create an issue on github](https://github.com/mattgemmell/Jekyll-Staging
 
 You can:
 
-- [Support my writing](https://www.patreon.com/mattgemmell).
+- [Support my writing](http://mattgemmell.com/support-me/).
 
 - Check out [my Amazon wishlist](http://www.amazon.co.uk/registry/wishlist/1BGIQ6Z8GT06F).
 
